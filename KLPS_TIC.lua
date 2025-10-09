@@ -34,6 +34,7 @@ function splat(x,y,r,c)
  	if not r then r=0  end
 	if not c then c=10 end
  	local ay= 0.2
+	--this line adds gravitational acceleration, looks best in sidescroller mode, thus why it is only applied in "play"
  	if gamestate~= "play" then ay=0 end
 	for i=1,6,1 do
  		spawnparticle(x,y,(math.random(60)-30)/10,(math.random(60)-60)/10,0,ay,300,0,c,false,r,8)
@@ -172,4 +173,5 @@ function particlelogic()
 		end
 	end
 	endparticlelogic=time()
+
 end

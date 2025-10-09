@@ -1,3 +1,5 @@
+--place somewhere in preamble, potentially init()
+allparticles={}
 
 --drop into draw function
 if #allparticles~=0 then
@@ -175,3 +177,4 @@ function particlelogic()
 	endparticlelogic=time()
 
 end
+

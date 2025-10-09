@@ -58,7 +58,7 @@ spawnparticle(	p.x,--x
 				7--layer
 				)
 
---bloated particle draw function from Thwimbly, you can def cut this down but it's here if you want it :)
+--bloated particle logic function from Thwimbly, you can def cut this down but it's here if you want it :)
 
 function particlelogic()
  beginparticlelogic = time()
@@ -67,6 +67,7 @@ function particlelogic()
  local floor = math.floor
  local sin = math.sin
 	for i,particle in ipairs(allparticles) do
+		--if particles haven't collided with wall then apply acceleration and velocity
 	  if particle.wall==false then
 	   particle.vx = particle.vx + particle.ax
 				particle.vy = particle.vy + particle.ay
@@ -77,20 +78,24 @@ function particlelogic()
     particle.y = floor(particle.y)
    end
 
-
-
-   --everything below this is specific logic for different particle types, such as clouds, which don't despawn and are instead teleported to the opposite side of the screen since we only spawn them upon level load
-   
-
-   --clouds
+	--clouds don't despawn
    if particle.typ ~= 1 then
     particle.life = particle.life-1
    end
-   
-   if particle.life <=0 
+
+ --delete particle if offscreen or life has elapsed
+  if particle.life <=0 
    or particle.y>300 then
 			 table.remove(allparticles,i)
 			end
+
+
+   --everything below this is specific logic for different particle types, such as clouds, which don't despawn and are instead teleported to the opposite side of the screen since we only spawn them upon level load
+   --you can pretty much remove everything below here
+
+   
+   
+   
    
 			if particle.typ==0 then
 			 if solid(particle.x,particle.y) and particle.y >10 then
@@ -177,4 +182,5 @@ function particlelogic()
 	endparticlelogic=time()
 
 end
+
 
